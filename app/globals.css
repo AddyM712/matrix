@@ -27,3 +27,11 @@ body {
     width: 100vw;
   }
 }
+
+/* Hide "Mart" text on mobile to save space */
+@media (max-width: 480px) {
+  /* Shrink search placeholder */
+  input[placeholder] {
+    font-size: 11px !important;
+  }
+}

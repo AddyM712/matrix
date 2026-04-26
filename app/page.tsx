@@ -305,7 +305,7 @@ function Header({ cart, setCartOpen, user, setUser, nav }) {
         {/* Logo */}
         <div onClick={()=>nav({type:"home"})} style={{ display:"flex",alignItems:"center",gap:7,cursor:"pointer",flexShrink:0 }}>
           <div style={{ width:34,height:34,background:EM,borderRadius:9,display:"flex",alignItems:"center",justifyContent:"center",color:LM,fontWeight:900,fontSize:18 }}>B</div>
-          <span style={{ fontWeight:800,fontSize:18,color:"#0F172A" }}>Mart</span>
+          <span style={{ fontWeight:800,fontSize:18,color:"#0F172A",display:"none" }}>Mart</span>
         </div>
 
         {/* Search */}
@@ -371,7 +371,7 @@ function Header({ cart, setCartOpen, user, setUser, nav }) {
               style={{ border:`1.5px solid ${EM}`,background:"#fff",color:EM,borderRadius:18,padding:"6px 14px",fontWeight:700,fontSize:12,cursor:"pointer" }}>Login</button>
           )}
           <button onClick={()=>setCartOpen(true)}
-            style={{ background:EM,color:"#fff",border:"none",borderRadius:18,padding:"7px 14px",fontWeight:700,fontSize:12,cursor:"pointer",display:"flex",alignItems:"center",gap:7,height:36 }}>
+            style={{ background:EM,color:"#fff",border:"none",borderRadius:18,padding:"7px 10px",fontWeight:700,fontSize:12,cursor:"pointer",display:"flex",alignItems:"center",gap:7,height:36 }}>
             🛍
             {cartCount>0 && <span style={{ background:LM,color:"#14532D",borderRadius:9,padding:"1px 7px",fontSize:10,fontWeight:900 }}>{cartCount}</span>}
             <span style={{ display:"none" }}>Cart</span>
@@ -696,7 +696,7 @@ function CheckoutPage({ cart, cartTotal, user, nav, onOrder }) {
         {/* Summary */}
         <div style={{ flex:"0 0 260px" }}>
           <div style={{ background:"#fff",borderRadius:14,border:"1px solid #E2E8F0",padding:20,position:"sticky",top:8 }}>
-            <div style={{ background:LM,color:"#14532D",fontSize:12,fontWeight:800,padding:"7px 14px",borderRadius:18,textAlign:"center",marginBottom:18 }}>⚡ Arrives in 10–15 min</div>
+            <div style={{ background:LM,color:"#14532D",fontSize:12,fontWeight:800,padding:"7px 10px",borderRadius:18,textAlign:"center",marginBottom:18 }}>⚡ Arrives in 10–15 min</div>
             <h3 style={{ fontWeight:700,fontSize:16,margin:"0 0 14px" }}>Order Summary</h3>
             <div className="bm-no-scroll" style={{ maxHeight:200,overflowY:"auto",marginBottom:14 }}>
               {cart.map(item=>(
@@ -1045,7 +1045,7 @@ export default function BMartApp() {
   const pp = { nav, cart, onAdd:addToCart, onUpd:updateQty, user, setUser };
 
   return (
-    <div style={{ position:"relative",height:"100dvh",overflow:"hidden",display:"flex",flexDirection:"column",background:"#F8FAFC",fontFamily:"system-ui,-apple-system,sans-serif",borderRadius:12 }}>
+    <div style={{ position:"relative",height:780,overflow:"hidden",display:"flex",flexDirection:"column",background:"#F8FAFC",fontFamily:"system-ui,-apple-system,sans-serif",borderRadius:12 }}>
       <style>{CSS}</style>
       <Header {...pp} setCartOpen={setCartOpen} />
 
@@ -1061,6 +1061,15 @@ export default function BMartApp() {
         {page.type==="orders"   && <OrdersPage    orders={orders} nav={nav} onAdd={addToCart} />}
         {page.type==="admin"    && <AdminPage     nav={nav} />}
       </div>
+
+      {/* Mobile cart bar */}
+      {cart.length>0 && !cartOpen && page.type!=="checkout" && (
+          <div onClick={()=>setCartOpen(true)}
+          style={{ position:"absolute",bottom:0,left:0,right:0,background:EM,color:"#fff",padding:"12px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer",zIndex:55,flexShrink:0 }}>
+          <span style={{ fontWeight:700,fontSize:13 }}>{cart.reduce((s,i)=>s+i.qty,0)} items · {Rs(cartTotal)}</span>
+          <span style={{ fontWeight:800,fontSize:13 }}>View Cart →</span>
+        </div>
+      )}
 
       {/* Cart Overlay */}
       {cartOpen && <div onClick={()=>setCartOpen(false)} style={{ position:"absolute",inset:0,background:"rgba(0,0,0,.45)",zIndex:60 }} />}
