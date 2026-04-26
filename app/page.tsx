@@ -1045,7 +1045,7 @@ export default function BMartApp() {
   const pp = { nav, cart, onAdd:addToCart, onUpd:updateQty, user, setUser };
 
   return (
-    <div style={{ position:"relative",height:780,overflow:"hidden",display:"flex",flexDirection:"column",background:"#F8FAFC",fontFamily:"system-ui,-apple-system,sans-serif",borderRadius:12 }}>
+    <div style={{ position:"relative",height:"100dvh",overflow:"hidden",display:"flex",flexDirection:"column",background:"#F8FAFC",fontFamily:"system-ui,-apple-system,sans-serif",borderRadius:12 }}>
       <style>{CSS}</style>
       <Header {...pp} setCartOpen={setCartOpen} />
 
