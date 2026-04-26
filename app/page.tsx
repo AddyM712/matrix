@@ -1064,7 +1064,7 @@ export default function BMartApp() {
 
       {/* Mobile cart bar */}
       {cart.length>0 && !cartOpen && page.type!=="checkout" && (
-          <div onClick={()=>setCartOpen(true)}
+        <div onClick={()=>setCartOpen(true)}
           style={{ position:"absolute",bottom:0,left:0,right:0,background:EM,color:"#fff",padding:"12px 20px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer",zIndex:55,flexShrink:0 }}>
           <span style={{ fontWeight:700,fontSize:13 }}>{cart.reduce((s,i)=>s+i.qty,0)} items · {Rs(cartTotal)}</span>
           <span style={{ fontWeight:800,fontSize:13 }}>View Cart →</span>
